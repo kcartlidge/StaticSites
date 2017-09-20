@@ -7,6 +7,13 @@ Serve any number of static sites under either HTTP or HTTPS using a single port.
 * Production ready; no proxy needed.
 * Run locally under HTTP for testing.
 
+## Running the Static Sites public site locally
+
+``` sh
+cd cmd
+./builds/macos/StaticSites -local staticsites.io -sites ../sites/sites.ini
+```
+
 ---
 
 ## If you just want to run your sites
@@ -19,6 +26,8 @@ Pre-built executables for Mac, Linux and Windows are available in the ```cmd/bui
 * Run ```StaticSites -sites <sites.ini> -port <port> -local <hostname>``` for serving locally.
 * Run ```StaticSites -sites <sites.ini> -port 443``` for production serving.
 * The default is to look for ```sites.ini``` in the current folder.
+
+The ```sites.ini``` file folders are relative to where Static Sites is started from, so should either contain absolute folder paths, paths starting with ```~```, or paths which are known to be valid when the server is launched.
 
 ---
 
