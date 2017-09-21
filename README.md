@@ -1,3 +1,5 @@
+[ ![Codeship Status for kcartlidge/StaticSites](https://app.codeship.com/projects/fbfaf590-8124-0135-31da-7e63943c116c/status?branch=master)](https://app.codeship.com/projects/246862)
+
 # Static Sites
 
 Serve any number of static sites under either HTTP or HTTPS using a single port.
