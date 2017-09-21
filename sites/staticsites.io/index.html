@@ -116,9 +116,10 @@ example2.com = /home/karl/my-sites/example-2.com</code></pre>
             </li>
             <li>
                 The number of sites you can serve is limited by the number of host names LetsEncrypt will allow in their certificates (around
-                100), as a single certificate is maintained for all the domains. There are also [rate limits applied by LetsEncrypt
-                for certificate issuance](https://letsencrypt.org/docs/rate-limits/), but certificates are only requested
-                when port <code>443</code> is used so simply avoid that port until ready.
+                <code>100</code>), as a single certificate is maintained for all the domains. There are also <a href="https://letsencrypt.org/docs/rate-limits/"
+                    target="_blank">rate limits applied by LetsEncrypt
+                for certificate issuance</a>, but certificates are only requested when port <code>443</code> is used so simply
+                avoid that port until ready.
             </li>
             <li>
                 No caching is currently implemented. Static sites are extremely light on resource usage, and the Static Sites server itself
