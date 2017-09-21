@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i");
+
 body {
-    background: #fdfdfd;
+    background: #fafafa;
     color: #666;
     padding: 0.5em 1em;
-    font-family: sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 14pt;
     line-height: 1.5em;
 }
@@ -20,9 +22,10 @@ a:hover {
     max-width: 50em;
 }
 #header {
+    color: #555;
     border-bottom: solid 1px #bbb;
-    padding: 0.5em 0;
-    margin-bottom: 3em;
+    padding: 1em 0;
+    margin-bottom: 4em;
 }
 #footer {
     border-top: solid 1px #bbb;
@@ -40,5 +43,23 @@ h2, h3 {
     margin: 1em 0 0.5em 0;
 }
 li {
-    margin: 0.25em 0;
+    margin: 0.4em 0;
+}
+pre {
+    overflow: scroll;
+    background: #fff;
+    border: solid 3px #ddd;
+    padding: 0.5em 0.5em;
+}
+code {
+    font-weight: bold;
+    border: 0;
+    background: #fff;
+    padding: 0.05em 0.2em;
+    margin: 0 0.2em;
+}
+pre > code {
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
 }

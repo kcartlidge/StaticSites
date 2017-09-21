@@ -2,14 +2,16 @@
 
 * These are step by step *manual* instructions.
 * They can be scripted into *CodeShip* or equivalent.
-* They are an example only; other options exist.
+* They are an *example only*; other options exist and may work better.
+* Re-deploying a site *does not* require a StaticSites restart.
+* Changing the ```sites.ini``` file *does* require a StaticSites restart.
 
 ## Installing onto a Digital Ocean droplet
 
 Replace the IP address in the commands below with the one for the new droplet that the commands create. As these commands assume you are SSHing as *root*, the paths for everything are assumed to be relative to the *root* account's *home* (eg ```/root```).
 
 * Add your SSH keys to your account.
-* Create a new Droplet (Debian, minimum spec, ensure your SSH keys are added).
+* Create a new Droplet (eg Debian, minimum spec, ensuring your SSH keys are added).
 * Test your droplet via: ```ssh root@46.101.92.76```
 * Upload the Static Sites application by: ```scp ./StaticSites root@46.101.92.76:StaticSites```
 * Compress your site locally: ```zip -r kcartlidge.zip kcartlidge.com/*```

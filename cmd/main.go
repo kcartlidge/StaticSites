@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 
 	simples "github.com/kcartlidge/simples-config"
 )
@@ -32,7 +33,6 @@ func main() {
 	ini := flag.String("sites", "sites.ini", "file containing site details")
 	pt := flag.Int("port", 8000, "port to serve sites on")
 	si := flag.String("local", "", "optional site to serve as localhost")
-	lg := flag.Bool("verbose", false, "show details of all requests")
 	flag.Usage()
 	fmt.Println()
 	flag.Parse()
@@ -44,7 +44,7 @@ func main() {
 	}
 
 	// Create a new server.
-	s, err := NewServer(*pt, *lg)
+	s, err := NewServer(*pt)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -55,7 +55,7 @@ func main() {
 		fmt.Println(" ", e.Key)
 		s.AddSite(e.Key, e.Value)
 		if e.Key == *si {
-			fmt.Println(" ", e.Key, " => localhost")
+			fmt.Println(" ", e.Key, " => localhost:"+strconv.Itoa(*pt))
 			s.AddSite("localhost", e.Value)
 		}
 	}

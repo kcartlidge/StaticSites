@@ -16,21 +16,19 @@ import (
 // Server ... Handles all sites.
 type Server struct {
 	Port      int
-	Logging   bool
 	Hostnames []string
 	Router    *mux.Router
 	Server    *http.Server
 }
 
 // NewServer ... Creates a new server.
-func NewServer(port int, logging bool) (Server, error) {
+func NewServer(port int) (Server, error) {
 	if !(port == 80 || port == 443 || port >= 2000) {
 		return Server{}, errors.New("the port should be 80, 443, or 2000+")
 	}
 
 	return Server{
 		Port:      port,
-		Logging:   logging,
 		Hostnames: []string{},
 		Router:    mux.NewRouter(),
 		Server:    nil,
