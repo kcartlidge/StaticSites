@@ -1,4 +1,4 @@
-[ ![Codeship Status for kcartlidge/StaticSites](https://app.codeship.com/projects/fbfaf590-8124-0135-31da-7e63943c116c/status?branch=master)](https://app.codeship.com/projects/246862)
+[![buddy pipeline](https://app.buddy.works/kcartlidge/staticsites/pipelines/pipeline/69154/badge.svg?token=d3d7d605b6634d88deb5b9f9ed424e77c1fe725dce86fdd4d145c674e3e3aeba "buddy pipeline")](https://app.buddy.works/kcartlidge/staticsites/pipelines/pipeline/69154)
 
 # Static Sites
 

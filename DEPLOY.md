@@ -1,7 +1,7 @@
 # Deploying Static Sites and your actual site(s)
 
 * These are step by step *manual* instructions.
-* They can be scripted into *CodeShip* or equivalent.
+* They can be scripted into *Buddy*, *CodeShip* or equivalent.
 * They are an *example only*; other options exist and may work better.
 * Re-deploying a site *does not* require a StaticSites restart.
 * Changing the ```sites.ini``` file *does* require a StaticSites restart.
@@ -21,7 +21,7 @@ Replace the IP address in the commands below with the one for the new droplet th
 * If the first time round, add a config: ```echo "kcartlidge.com = /root/sites/kcartlidge.com" > sites/sites.ini```
 * Start: ```./StaticSites -sites sites/sites.ini -port 443```
 
-Note that the ```sites.ini``` configuration should have *full paths* for the site folders, so regardless of the launching process they can be found. 
+Note that the ```sites.ini``` configuration should have *full paths* for the site folders, so regardless of the launching process they can be found.
 
 ### Installing unzip if it is missing from your droplet
 
