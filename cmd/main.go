@@ -53,12 +53,14 @@ func main() {
 	fmt.Println("SITES:")
 	for _, fi := range dirs {
 		nm := fi.Name()
-		fo := filepath.Join(*di, nm)
-		fmt.Println(" ", nm, " =>", fo)
-		s.AddSite(nm, fo)
-		if nm == *si {
-			fmt.Println(" ", nm, " => localhost:"+strconv.Itoa(*pt))
-			s.AddSite("localhost", fo)
+		if nm != "letsencrypt" {
+			fo := filepath.Join(*di, nm)
+			fmt.Println(" ", nm, " =>", fo)
+			s.AddSite(nm, fo)
+			if nm == *si {
+				fmt.Println(" ", nm, " => localhost:"+strconv.Itoa(*pt))
+				s.AddSite("localhost", fo)
+			}
 		}
 	}
 	go s.Serve()
