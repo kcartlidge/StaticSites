@@ -19,7 +19,7 @@ The static sites public website just mentioned is contained within this reposito
 
 ``` sh
 cd cmd
-./builds/macos/StaticSites -local staticsites.io -sites ../sites/sites.ini
+./builds/macos/StaticSites -local staticsites.io -sites ../sites
 ```
 
 Switch around the build folder and slashes according to whether you are running Mac OS, Linux or Windows.
@@ -40,7 +40,7 @@ These instructions assume Mac OS, but will work on Linux and Windows by switchin
 
 ``` sh
 cd StaticSites/cmd
-go build -o builds/macos/StaticSites && ./builds/macos/StaticSites -sites ../sites/sites.ini -port 3000
+go build -o builds/macos/StaticSites && ./builds/macos/StaticSites -sites ../sites -port 3000
 ```
 
 ### Create binaries for all platforms
@@ -50,4 +50,4 @@ cd StaticSites/cmd
 ./make/macos.sh
 ```
 
-If you do a rebuild then ensure you clone the ```cmd/builds``` folder to the ```sites/staticsites.io/builds``` folder so the public site will reflect the changes.
+If you do a rebuild then ensure you copy the ```cmd/builds``` folder to the ```sites/staticsites.io/builds``` folder so the public site will reflect the changes.

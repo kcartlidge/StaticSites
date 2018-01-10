@@ -36,7 +36,7 @@
                 Have your sites running <strong>HTTPS</strong> with absolutely <strong>zero configuration</strong>.
             </li>
             <li>
-                <strong>No need</strong> for a traditional <strong>web server</strong> deploy, meaning <strong>tiny resource</strong>                usage.
+                <strong>No need</strong> for a traditional <strong>web server</strong> deploy, meaning <strong>tiny resource</strong> usage.
             </li>
             <li>
                 <strong>Production ready</strong> with a <strong>single file</strong> deployment and <strong>great performance</strong>.
@@ -51,8 +51,7 @@
 
         <h2>Installing</h2>
         <p>
-            Whether you are wanting to run on your local machine or a server/cloud instance makes no difference. Follow the steps below
-            to get started.
+            Whether you are wanting to run on your local machine or a server/cloud instance makes no difference. Follow the steps below to get started.
         </p>
         <h3>Download the relevant version</h3>
         <ul>
@@ -62,90 +61,67 @@
         </ul>
         <h3>Check the dependencies and install it</h3>
         <p>
-            <em>There are no dependencies. There is no installation needed.</em><br/> Just drop the download into a suitable
-            folder and it is ready to run.
+            <em>There are no dependencies. There is no installation needed.</em><br/> Just drop the download into a suitable folder and it is ready to run.
         </p>
 
         <h2>Running</h2>
         <p>
-            Create a <code>sites.ini</code> file alongside the application containing something like the following, replacing
-            <code>example.com</code> etc with your site domains and folders:
-        </p>
-        <pre><code>example.com = /home/karl/my-sites/example.com
-example2.com = /home/karl/my-sites/example-2.com</code></pre>
-        <p>
-            Copy your static site(s) into place in folders alongside the downloaded application, named as per the domains. The folder
-            tree should look something like this:
+            Copy your static site(s) into place in folders alongside the downloaded application, named as per the domains. Remember that on Linux servers upper/lower case matters. The folder tree should look something like this:
         </p>
         <pre><code>/home/karl/my-sites
     StaticSites
-    sites.ini
-    /example.com
+    /staticsites.io
         index.html
-    /example-2.com
+    /www.example.com
         index.html</code></pre>
         <p>
             You can then run the server:
         </p>
         <pre><code>cd /home/karl/my-sites
-./StaticSites -sites sites.ini -port 8000 -local example.com</code></pre>
+./StaticSites -sites ./sites -port 8000 -local staticsites.io</code></pre>
         <p>
-            This will launch <em>all</em> sites listed in the <code>sites.ini</code> file on port <code>8000</code> (which
-            is the default anyway, but shown here for completeness). The sites will all start responding to requests to their
-            domain name provided of course that your DNS routes it in.
+            This will launch <em>all</em> sites found in the <code>./sites</code> folder on port <code>8000</code> (which is the default anyway, but shown here for completeness). The sites will all start responding to requests to their domain name provided
+            of course that your DNS routes them in.
         </p>
         <p>
-            Don't expect to see the sites at <code>localhost</code> by default. The <code>local</code> parameter allows you
-            to nominate one site to run as <code>localhost</code> so there is no need to set the DNS or do any workarounds
-            when you want to work on it locally.
+            Don't expect to see any sites responding at <code>localhost</code> by default, as the routing is done by domain name so you would usually need to browse to the domain. In order to make things easier for local work, the <code>local</code> parameter
+            allows you to nominate one site to run as <code>localhost</code> so there is no need to set the DNS or do any workarounds when you want to work on it as it will then respond directly to <code>localhost</code>.
         </p>
 
         <h3>Serving using HTTPS (green padlock)</h3>
         <p>
-            Just set the port to <code>443</code>, which is the standard for HTTPS. Static Sites will handle obtaining any
-            certificates, caching them, and renewing them (for all the sites).
+            Just set the port to <code>443</code>, which is the standard for HTTPS. Static Sites will handle obtaining any certificates, caching them, and renewing them (for all the sites).
         </p>
         <p>
-            The first time a site is hit there may be a slight delay whilst the certificate is updated, but subsequent hits to that site
-            will automatically use the cached version and not be subject to that brief pause.
+            The first time a site is hit there may be a slight delay whilst the certificate is updated, but subsequent hits to that site will automatically use the cached version and not be subject to that brief pause.
         </p>
 
         <h2>Notes</h2>
         <ul>
             <li>
-                Changing the <code>sites.ini</code> file requires a StaticSites restart. Changing the <em>content</em> of
-                a site folder <em>does not</em>.
+                Sites are scanned at startup, so adding/removing a site requires a StaticSites restart. Changing the <em>content</em> of a site folder <em>does not</em>.
             </li>
             <li>
-                The site domains on the left in the <code>sites.ini</code> file should be the complete domain name, including
-                subdomain, but without any protocol, like <code>example.com</code> or <code>blog.kcartlidge.com</code>.
+                The site folders should be the complete domain name, including subdomain, but without any protocol, like <code>example.com</code> or <code>blog.kcartlidge.com</code>.
             </li>
             <li>
-                The site folders on the right in the <code>sites.ini</code> file should either be relative to the folder
-                you launch the server from (<code>./sites</code>), fixed to your home folder (<code>~/sites</code>), or absolute
-                paths (<code>/home/karl/sites</code>) that will work from anywhere. This will matter hugely if you have the
-                server launch automatically and it runs under a different user, as the current directory and the home folder
-                will probably change from when run manually.
+                The site folders should be accessible to the relevant user if you have the server launch automatically (eg with <em>pm2</em> or <em>supervisor</em>) and it runs under a different user.
             </li>
             <li>
                 The number of sites you can serve is limited by the number of host names LetsEncrypt will allow in their certificates (around
-                <code>100</code>), as a single certificate is maintained for all the domains. There are also <a href="https://letsencrypt.org/docs/rate-limits/"
-                    target="_blank">rate limits applied by LetsEncrypt
-                for certificate issuance</a>, but certificates are only requested when port <code>443</code> is used so simply
-                avoid that port until ready.
+                <code>100</code>), as a single certificate is maintained for all the domains. There are also <a href="https://letsencrypt.org/docs/rate-limits/" target="_blank">rate limits applied by LetsEncrypt
+                for certificate issuance</a>, but certificates are only requested when port <code>443</code> is used so simply avoid that port until ready.
             </li>
             <li>
-                No caching is currently implemented. Static sites are extremely light on resource usage, and the Static Sites server itself
-                hugely lighter than full fledged traditional web servers, so performance should not be an issue. If it is,
-                static sites are also prime candidates for services like <em>CloudFlare</em> or equivalent.
+                No caching is currently implemented. Static sites are extremely light on resource usage, and the Static Sites server itself hugely lighter than fully fledged traditional web servers, so performance should not be an issue. If it is, static sites are also
+                prime candidates for services like <em>CloudFlare</em> or equivalent.
             </li>
         </ul>
 
         <div id="footer">
             <p>
-                <strong>Simplicity</strong> is the driving force. You get configuration free serving of all your static sites
-                using HTTPS with the smallest effort possible from a self-hosted facility. Requests for things such as Markdown
-                processing, folder listings and so forth are beyond that scope.
+                <strong>Simplicity</strong> is the driving force. You get configuration free serving of all your static sites using HTTPS with the smallest effort possible from a self-hosted facility. Requests for things such as Markdown processing, folder
+                listings and so forth are beyond that scope.
             </p>
         </div>
     </div>

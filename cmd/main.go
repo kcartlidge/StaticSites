@@ -4,11 +4,11 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strconv"
-
-	simples "github.com/kcartlidge/simples-config"
 )
 
 func main() {
@@ -30,18 +30,12 @@ func main() {
 	fmt.Println()
 
 	// Handle the args.
-	ini := flag.String("sites", "sites.ini", "file containing site details")
+	di := flag.String("sites", ".", "folder containing sites")
 	pt := flag.Int("port", 8000, "port to serve sites on")
 	si := flag.String("local", "", "optional site to serve as localhost")
 	flag.Usage()
 	fmt.Println()
 	flag.Parse()
-
-	// Load the sites config.
-	c, err := simples.CreateConfig(*ini)
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
 
 	// Create a new server.
 	s, err := NewServer(*pt)
@@ -49,14 +43,22 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	// Scan the working folder and treat subfolders as sites.
+	dirs, err := ioutil.ReadDir(*di)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	// Register and serve the sites.
 	fmt.Println("SITES:")
-	for _, e := range c.GetSection("DEFAULT") {
-		fmt.Println(" ", e.Key)
-		s.AddSite(e.Key, e.Value)
-		if e.Key == *si {
-			fmt.Println(" ", e.Key, " => localhost:"+strconv.Itoa(*pt))
-			s.AddSite("localhost", e.Value)
+	for _, fi := range dirs {
+		nm := fi.Name()
+		fo := filepath.Join(*di, nm)
+		fmt.Println(" ", nm, " =>", fo)
+		s.AddSite(nm, fo)
+		if nm == *si {
+			fmt.Println(" ", nm, " => localhost:"+strconv.Itoa(*pt))
+			s.AddSite("localhost", fo)
 		}
 	}
 	go s.Serve()
