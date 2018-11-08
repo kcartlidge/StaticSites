@@ -1,5 +1,3 @@
-[![buddy pipeline](https://app.buddy.works/kcartlidge/staticsites/pipelines/pipeline/69154/badge.svg?token=d3d7d605b6634d88deb5b9f9ed424e77c1fe725dce86fdd4d145c674e3e3aeba "buddy pipeline")](https://app.buddy.works/kcartlidge/staticsites/pipelines/pipeline/69154)
-
 # Static Sites
 
 Serve any number of static sites under either HTTP or HTTPS using a single port.
@@ -11,7 +9,11 @@ Serve any number of static sites under either HTTP or HTTPS using a single port.
 
 ## Documentation
 
-Some snippets of useful info are available below, but in general you should [go to the Static Sites public website](https://staticsites.io) for fuller details.
+Some snippets of useful info are available below, but in general you should [go to the Static Sites public website](http://localhost:8000) for fuller details, by running for example:
+
+``` sh
+./builds/macos/StaticSites -local staticsites.io -sites ../sites
+```
 
 ## Running the Static Sites public website locally
 
