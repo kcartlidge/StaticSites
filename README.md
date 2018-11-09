@@ -28,13 +28,13 @@ Switch around the build folder and slashes according to whether you are running 
 
 ---
 
-## If you just want to run your own sites ...
+## If you just want to run your own sites
 
 Pre-built executables for Mac, Linux and Windows are available in the ```cmd/builds``` folder as well as from the public site. [Visit the site](https://staticsites.io) or run it locally for details.
 
 ---
 
-## If you want to work on the source ...
+## You want to work on the source
 
 These instructions assume Mac OS, but will work on Linux and Windows by switching the path slashes (if needed) and choosing the relevant make script.
 

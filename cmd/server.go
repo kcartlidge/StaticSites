@@ -39,7 +39,7 @@ func NewServer(port int) (Server, error) {
 func (s *Server) AddSite(hostname, folder string) {
 	s.Hostnames = append(s.Hostnames, hostname)
 	sr := s.Router.Host(hostname).Subrouter()
-	sr.PathPrefix("/").Handler(http.FileServer(http.Dir(folder)))
+	sr.PathPrefix("/").Handler(s.AddLogging(http.FileServer(http.Dir(folder))))
 }
 
 // Serve ... Starts the server going.
@@ -47,6 +47,7 @@ func (s *Server) Serve() {
 	addr := strconv.Itoa(s.Port)
 	fmt.Println()
 	fmt.Println("Serving on", addr)
+	fmt.Println()
 
 	// Only ONE certificate is used so if you are hosting multiple
 	// sites you need a certificate that allows multiple 'common names'.
