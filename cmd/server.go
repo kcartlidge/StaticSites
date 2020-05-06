@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/tls"
 	"errors"
 	"fmt"
 	"log"
@@ -50,34 +49,16 @@ func (s *Server) Serve() {
 	fmt.Println()
 
 	// Only ONE certificate is used so if you are hosting multiple
-	// sites you need a certificate that allows multiple 'common names'.
+	// sites you need a certificate that allows multiple common names.
 	// LetsEncrypt certificates support this.
+	//
+	// https://pkg.go.dev/golang.org/x/crypto@v0.0.0-20200429183012-4b2356b1ed79/acme/autocert?tab=doc#NewListener
+	// Certificates are cached in a "golang-autocert" directory under an operating
+	// system-specific cache or temp directory. This may not be suitable for servers
+	// spanning multiple machines.
 	if addr == "443" {
 		// HTTPS
-
-		// Start a standard HTTP server that redirects to HTTPS.
-		fmt.Println("Starting HTTP to HTTPS redirect")
-		go func() {
-			redir := mux.NewRouter()
-			redir.HandleFunc("/", s.HTTP2HTTPS)
-			plain := &http.Server{
-				Handler:      redir,
-				Addr:         ":80",
-				WriteTimeout: 15 * time.Second,
-				ReadTimeout:  15 * time.Second,
-			}
-			plain.ListenAndServe()
-		}()
-
-		// Start the HTTPS server.
-		s.Server = &http.Server{
-			Handler:      s.Router,
-			Addr:         ":" + addr,
-			WriteTimeout: 15 * time.Second,
-			ReadTimeout:  15 * time.Second,
-			TLSConfig:    s.GetTLS(s.Hostnames),
-		}
-		log.Fatal(s.Server.ListenAndServeTLS("", ""))
+		log.Fatal(http.Serve(autocert.NewListener(s.Hostnames...), s.Router))
 	} else {
 		// HTTP
 		s.Server = &http.Server{
@@ -88,23 +69,4 @@ func (s *Server) Serve() {
 		}
 		log.Fatal(s.Server.ListenAndServe())
 	}
-}
-
-// GetTLS ... Get TLS support for LetsEncrypt.
-func (s *Server) GetTLS(hostnames []string) *tls.Config {
-	cache := autocert.DirCache("letsencrypt")
-	m := autocert.Manager{
-		Prompt:     autocert.AcceptTOS,
-		Cache:      cache,
-		HostPolicy: autocert.HostWhitelist(hostnames...),
-	}
-	return &tls.Config{GetCertificate: m.GetCertificate}
-}
-
-// HTTP2HTTPS ... Redirects from HTTP to HTTPS.
-func (s *Server) HTTP2HTTPS(w http.ResponseWriter, r *http.Request) {
-	cs := r.Host
-	r.URL.Scheme = "https"
-	r.URL.Host = cs
-	http.Redirect(w, r, r.URL.String(), http.StatusFound)
 }

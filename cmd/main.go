@@ -53,7 +53,7 @@ func main() {
 	fmt.Println("SITES:")
 	for _, fi := range dirs {
 		nm := fi.Name()
-		if fi.IsDir() && nm != "letsencrypt" {
+		if fi.IsDir() {
 			fo := filepath.Join(*di, nm)
 			fmt.Println(" ", nm, " =>", fo)
 			s.AddSite(nm, fo)

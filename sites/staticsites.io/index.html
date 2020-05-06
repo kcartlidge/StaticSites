@@ -1,6 +1,6 @@
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -17,155 +17,123 @@
 
     <title>Static Sites</title>
     <link rel="stylesheet" media="all" href="/css/site.css" />
-  </head>
+</head>
 
-  <body>
+<body>
     <div id="header">
-      <h1>Static Sites</h1>
-      <div>K Cartlidge</div>
+        <h1>Static Sites</h1>
+        <div>K Cartlidge</div>
     </div>
 
     <div id="main">
 
-      <h2>About Static Sites</h2>
-      <ul>
-        <li>
-          Run <strong>all</strong> your static <strong>websites</strong> on a
-          <strong>single port</strong> with just
-          <strong>one server</strong>.
-        </li>
-        <li>
-          Have your sites running <strong>HTTPS</strong> with absolutely
-          <strong>zero configuration</strong>.
-        </li>
-        <li>
-          <strong>No need</strong> for a traditional <strong>web server</strong>
-          deploy, meaning <strong>tiny resource</strong> usage.
-        </li>
-        <li>
-          <strong>Production ready</strong> with a <strong>single file</strong>
-          deployment and <strong>great performance</strong>.
-        </li>
-        <li>
-          <strong>Open source</strong> codebase for peace of mind:
-          <a href="https://github.com/kcartlidge/StaticSites" target="_blank">
+        <h2>About Static Sites</h2>
+        <ul>
+            <li>
+                Run <strong>all</strong> your static <strong>websites</strong> on a
+                <strong>single port</strong> with just
+                <strong>one server</strong>.
+            </li>
+            <li>
+                Have your sites running <strong>HTTPS</strong> with absolutely
+                <strong>zero configuration</strong>.
+            </li>
+            <li>
+                <strong>No need</strong> for a traditional <strong>web server</strong> deploy, meaning <strong>tiny resource</strong> usage.
+            </li>
+            <li>
+                <strong>Production ready</strong> with a <strong>single file</strong> deployment and <strong>great performance</strong>.
+            </li>
+            <li>
+                <strong>Open source</strong> codebase for peace of mind:
+                <a href="https://github.com/kcartlidge/StaticSites" target="_blank">
             view the code on my GitHub.
           </a>
-        </li>
-      </ul>
+            </li>
+        </ul>
 
-      <h2>Installing</h2>
-      <p>
-        Whether you are wanting to run on your local machine or a server/cloud
-        instance makes no difference. Follow the steps below to get started.
-      </p>
-      <h3>Download the relevant version</h3>
-      <ul>
-        <li><a href="/builds/macos/StaticSites">Download the Mac OS version</a></li>
-        <li><a href="/builds/linux/StaticSites">Download the Linux version</a></li>
-        <li><a href="/builds/windows/StaticSites.exe">Download the Windows
+        <h2>Installing</h2>
+        <p>
+            Whether you are wanting to run on your own local machine or a server/cloud instance makes no difference. Follow the steps below to get started.
+        </p>
+        <h3>Download the relevant version</h3>
+        <ul>
+            <li><a href="/builds/macos/StaticSites">Download the Mac OS version</a></li>
+            <li><a href="/builds/linux/StaticSites">Download the Linux version</a></li>
+            <li><a href="/builds/windows/StaticSites.exe">Download the Windows
             version</a></li>
-      </ul>
-      <h3>Check the dependencies and install it</h3>
-      <p>
-        <em>There are no dependencies. There is no installation needed.</em><br/>
-          Just drop the download into a suitable folder and it is ready to run.
+        </ul>
+        <h3>Check the dependencies and install</h3>
+        <p>
+            <em>There are no dependencies. There is no installation needed.</em><br/> Just drop the download into a suitable folder and it is ready to run.
         </p>
 
         <h2>Running</h2>
         <p>
-          Copy your static site(s) into place in folders alongside the
-          downloaded application, named as per the domains. Remember that on
-          Linux servers upper/lower case matters. The folder tree should look
-          something like this:
+            Copy your static site(s) into place in folders alongside the downloaded application, named as per the domains. The folder tree could look something like this:
         </p>
         <pre><code>/home/karl/my-sites
     StaticSites
-    /staticsites.io
-        index.html
-    /www.example.com
-        index.html</code></pre>
+    /sites
+        /staticsites.io
+            index.html
+        /www.example.com
+            index.html</code></pre>
         <p>
-          You can then run the server:
+            You can then run the server:
         </p>
         <pre><code>cd /home/karl/my-sites
 ./StaticSites -sites ./sites -port 8000 -local staticsites.io</code></pre>
         <p>
-          This will launch <em>all</em> sites found in the <code>./sites</code>
-          folder on port <code>8000</code> (which is the default anyway, but
-          shown here for completeness). The sites will all start responding to
-          requests to their domain name provided
-          of course that your DNS routes them in.
+            This will launch <em>all</em> sites found in the <code>./sites</code> folder on port <code>8000</code> (which is the default anyway, but shown here for completeness). The sites will all start responding to requests to their domain name provided
+            of course that your DNS routes them in.
         </p>
         <p>
-          Don't expect to see any sites responding at <code>localhost</code> by
-          default, as the routing is done by domain name so you would usually
-          need to browse to the domain. In order to make things easier for local
-          work, the <code>local</code> parameter
-          allows you to nominate one site to run as <code>localhost</code> so
-          there is no need to set the DNS or do any workarounds when you want to
-          work on it as it will then respond directly to <code>localhost</code>.
+            Running locally, don't expect to see any sites responding at <code>localhost</code> by default, as the routing is done by domain name so you would usually need to browse to the domain. In order to make things easier for local work, the <code>local</code>            parameter allows you to nominate one site to run as <code>localhost</code> so there is no need to set the DNS or do any workarounds when you want to work on it as it will then respond directly to <code>localhost</code>.
         </p>
 
-        <h3>Serving using HTTPS (green padlock)</h3>
+        <h3>Serving using HTTPS (the browser padlock)</h3>
         <p>
-          Just set the port to <code>443</code>, which is the standard for
-          HTTPS. Static Sites will handle obtaining any certificates, caching
-          them, and renewing them (for all the sites).
+            Just set the port to <code>443</code>, which is the standard for HTTPS. Static Sites will handle obtaining any certificates, caching them, and renewing them (for all the sites).
         </p>
         <p>
-          The first time a site is hit there may be a slight delay whilst the
-          certificate is updated, but subsequent hits to that site will
-          automatically use the cached version and not be subject to that brief
-          pause.
+            The first time a site is hit there may be a slight delay whilst the certificate is updated, but subsequent hits to that site will automatically use the cached version and not be subject to that brief pause.
         </p>
 
         <h2>Notes</h2>
         <ul>
-          <li>
-            Sites are scanned at startup, so adding/removing a site requires a
-            StaticSites restart. Changing the <em>content</em> of a site folder
-            <em>does not</em>.
-          </li>
-          <li>
-            The site folders should be the complete domain name, including
-            subdomain, but without any protocol, like <code>example.com</code>
-            or <code>blog.kcartlidge.com</code>.
-          </li>
-          <li>
-            The site folders should be accessible to the relevant user if you
-            have the server launch automatically (eg with <em>pm2</em> or <em>supervisor</em>)
-            and it runs under a different user.
-          </li>
-          <li>
-            The number of sites you can serve is limited by the number of host
-            names LetsEncrypt will allow in their certificates (around
-            <code>100</code>), as a single certificate is maintained for all the
-            domains. There are also <a
-              href="https://letsencrypt.org/docs/rate-limits/" target="_blank">rate
+            <li>
+                Sites are scanned at startup, so adding/removing a site requires a StaticSites restart. Changing the <em>content</em> of a site folder
+                <em>does not</em>.
+            </li>
+            <li>
+                The site folders should be the complete domain name, including subdomain, but without any protocol. Like <code>example.com</code> or <code>blog.kcartlidge.com</code>.
+            </li>
+            <li>
+                The site folders should be accessible to the relevant user, especially if you have the server launch automatically (eg with <em>pm2</em> or <em>supervisor</em>) and it runs under a different one.
+            </li>
+            <li>
+                The number of sites you can serve is limited by the number of host names LetsEncrypt will allow in their certificates (around
+                <code>100</code>), as a single certificate is maintained for all the domains. There are also <a href="https://letsencrypt.org/docs/rate-limits/" target="_blank">rate
               limits applied by LetsEncrypt
-              for certificate issuance</a>, but certificates are only requested
-            when port <code>443</code> is used so simply avoid that port until
-            ready.
-          </li>
-          <li>
-            No caching is currently implemented. Static sites are extremely
-            light on resource usage, and the Static Sites server itself hugely
-            lighter than fully fledged traditional web servers, so performance
-            should not be an issue. If it is, static sites are also
-            prime candidates for services like <em>CloudFlare</em> or
-            equivalent.
-          </li>
+              for certificate issuance</a>, but certificates are only requested when port <code>443</code> is used so simply avoid that port until ready.
+            </li>
+            <li>
+                No content caching is currently implemented. Static sites are extremely light on resource usage, and the Static Sites server itself is hugely lighter than fully fledged traditional web servers, so performance should not be an issue. If it is, static sites
+                are also prime candidates for fronting by services like <em>CloudFlare</em> or equivalent.
+            </li>
+            <li>
+                There is no HTTP to HTTPS redirect. I'm not in favour of supporting that; supporting a redirect reduces the chance of bookmarks/links being updated. If you need HTTP for some strange reason, run a second StaticSites instance on port 80 looking at the
+                same site(s).
+            </li>
         </ul>
 
         <div id="footer">
-          <p>
-            <strong>Simplicity</strong> is the driving force. You get
-            configuration free serving of all your static sites using HTTPS with
-            the smallest effort possible from a self-hosted facility.
-          </p>
+            <p>
+                <strong>Simplicity</strong> is the driving force. You get configuration free serving of all your static sites using HTTPS with the smallest effort possible from a self-hosted facility.
+            </p>
         </div>
-      </div>
-    </body>
+    </div>
+</body>
 
-  </html>
+</html>
