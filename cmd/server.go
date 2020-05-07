@@ -16,12 +16,13 @@ import (
 type Server struct {
 	Port      int
 	Hostnames []string
+	Logging   bool
 	Router    *mux.Router
 	Server    *http.Server
 }
 
 // NewServer ... Creates a new server.
-func NewServer(port int) (Server, error) {
+func NewServer(port int, logging bool) (Server, error) {
 	if !(port == 80 || port == 443 || port >= 2000) {
 		return Server{}, errors.New("the port should be 80, 443, or 2000+")
 	}
@@ -29,6 +30,7 @@ func NewServer(port int) (Server, error) {
 	return Server{
 		Port:      port,
 		Hostnames: []string{},
+		Logging:   logging,
 		Router:    mux.NewRouter(),
 		Server:    nil,
 	}, nil
@@ -38,7 +40,11 @@ func NewServer(port int) (Server, error) {
 func (s *Server) AddSite(hostname, folder string) {
 	s.Hostnames = append(s.Hostnames, hostname)
 	sr := s.Router.Host(hostname).Subrouter()
-	sr.PathPrefix("/").Handler(s.AddLogging(http.FileServer(http.Dir(folder))))
+	if s.Logging {
+		sr.PathPrefix("/").Handler(s.AddLogging(http.FileServer(http.Dir(folder))))
+	} else {
+		sr.PathPrefix("/").Handler(http.FileServer(http.Dir(folder)))
+	}
 }
 
 // Serve ... Starts the server going.

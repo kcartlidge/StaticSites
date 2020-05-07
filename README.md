@@ -6,6 +6,8 @@ Serve any number of static sites under either HTTP or HTTPS using a single port.
 * Zero-configuration HTTPS.
 * Production ready; no proxy needed.
 * Run locally under HTTP for testing.
+* A single 9mb binary deploy (+ sites).
+* Uses less then 20mb RAM on Debian 4.19.
 
 ## Documentation
 
@@ -13,7 +15,7 @@ Some snippets of useful info are available below, but in general you should [see
 
 ``` sh
 cd cmd
-./builds/macos/StaticSites -local staticsites.io -sites ../sites -port 8000
+./builds/macos/StaticSites -verbose -local staticsites.io -sites ../sites -port 8000
 ```
 
 Switch around the build folder and slashes according to whether you are running Mac OS, Linux or Windows.
@@ -34,7 +36,7 @@ These instructions assume Mac OS, but will work on Linux and Windows by switchin
 
 ``` sh
 cd cmd
-go build -o builds/macos/StaticSites && ./builds/macos/StaticSites -sites ../sites -port 8000
+go build -o builds/macos/StaticSites && ./builds/macos/StaticSites -verbose -sites ../sites -port 8000
 ```
 
 ### Create binaries for all platforms

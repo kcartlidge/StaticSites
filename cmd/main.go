@@ -19,26 +19,27 @@ func main() {
 
 	// Banner text.
 	fmt.Println()
-	fmt.Println(" ____  _        _   _        ____  _ _")
-	fmt.Println("/ ___|| |_ __ _| |_(_) ___  / ___|(_| |_ ___ ___")
-	fmt.Println("\\___ \\| __/ _` | __| |/ __| \\___ \\| | __/ _ / __|")
-	fmt.Println(" ___) | || (_| | |_| | (__   ___) | | ||  __\\__ \\")
-	fmt.Println("|____/ \\__\\__,_|\\__|_|\\___| |____/|_|\\__\\___|___/")
+	fmt.Println(` ____  _        _   _        ____  _ _`)
+	fmt.Println(`/ ___|| |_ __ _| |_(_) ___  / ___|(_| |_ ___ ___`)
+	fmt.Println(`\___ \| __/ _  | __| |/ __| \___ \| | __/ _ / __|`)
+	fmt.Println(` ___) | || (_| | |_| | (__   ___) | | ||  __\__ \`)
+	fmt.Println(`|____/ \__\__,_|\__|_|\___| |____/|_|\__\___|___/`)
 	fmt.Println()
 	fmt.Println("https://github.com/kcartlidge/StaticSites")
 	fmt.Println()
 	fmt.Println()
 
 	// Handle the args.
-	di := flag.String("sites", ".", "folder containing sites")
-	pt := flag.Int("port", 8000, "port to serve sites on")
+	di := flag.String("sites", ".", "folder containing all site folders")
+	pt := flag.Int("port", 8000, "port to serve sites on (443 for https)")
 	si := flag.String("local", "", "optional site to serve as localhost")
+	lg := flag.Bool("verbose", false, "whether to show requests as they occur")
 	flag.Usage()
 	fmt.Println()
 	flag.Parse()
 
 	// Create a new server.
-	s, err := NewServer(*pt)
+	s, err := NewServer(*pt, *lg)
 	if err != nil {
 		log.Fatalln(err)
 	}

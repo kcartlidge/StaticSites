@@ -30,7 +30,7 @@
         <h2>About Static Sites</h2>
         <ul>
             <li>
-                Run <strong>all</strong> your static <strong>websites</strong> on a
+                Run <strong>all</strong> your <strong>static sites</strong> on a
                 <strong>single port</strong> with just
                 <strong>one server</strong>.
             </li>
@@ -39,7 +39,7 @@
                 <strong>zero configuration</strong>.
             </li>
             <li>
-                <strong>No need</strong> for a traditional <strong>web server</strong> deploy, meaning <strong>tiny resource</strong> usage.
+                <strong>No</strong> need for a traditional <strong>web server</strong> deploy, meaning <strong>tiny resource</strong> usage.
             </li>
             <li>
                 <strong>Production ready</strong> with a <strong>single file</strong> deployment and <strong>great performance</strong>.
@@ -70,7 +70,7 @@
 
         <h2>Running</h2>
         <p>
-            Copy your static site(s) into place in folders alongside the downloaded application, named as per the domains. The folder tree could look something like this:
+            The suggested approach is to copy your static site(s) into place in folders alongside the downloaded application, named as per the domains. The folder tree would look something like this:
         </p>
         <pre><code>/home/karl/my-sites
     StaticSites
@@ -83,21 +83,22 @@
             You can then run the server:
         </p>
         <pre><code>cd /home/karl/my-sites
-./StaticSites -sites ./sites -port 8000 -local staticsites.io</code></pre>
+./StaticSites -sites ./sites -verbose -port 8000 -local staticsites.io</code></pre>
         <p>
-            This will launch <em>all</em> sites found in the <code>./sites</code> folder on port <code>8000</code> (which is the default anyway, but shown here for completeness). The sites will all start responding to requests to their domain name provided
-            of course that your DNS routes them in.
+            This will launch <em>all</em> sites found in the <code>./sites</code> folder on port <code>8000</code> (which is the default anyway, but shown here for completeness). The sites will all start responding to requests to their domain name, provided
+            of course that your DNS routes them in. The <code>verbose</code> option switches on the display of requests as they are received.
         </p>
         <p>
-            Running locally, don't expect to see any sites responding at <code>localhost</code> by default, as the routing is done by domain name so you would usually need to browse to the domain. In order to make things easier for local work, the <code>local</code>            parameter allows you to nominate one site to run as <code>localhost</code> so there is no need to set the DNS or do any workarounds when you want to work on it as it will then respond directly to <code>localhost</code>.
+            By default you won't see any sites responding at <code>localhost</code> as routing is done by domain name, so you would usually need to browse to the domain to get a response. To work around this the <code>local</code>parameter allows you
+            to nominate one site to run as <code>localhost</code>.
         </p>
 
         <h3>Serving using HTTPS (the browser padlock)</h3>
         <p>
-            Just set the port to <code>443</code>, which is the standard for HTTPS. Static Sites will handle obtaining any certificates, caching them, and renewing them (for all the sites).
+            Set the port to <code>443</code>, the standard for HTTPS. Static Sites will handle obtaining any certificates, caching them, and renewing them (for all the sites).
         </p>
         <p>
-            The first time a site is hit there may be a slight delay whilst the certificate is updated, but subsequent hits to that site will automatically use the cached version and not be subject to that brief pause.
+            The first time a site is hit there may be a slight delay whilst the certificate is updated, but subsequent hits to that site will automatically use the cached version.
         </p>
 
         <h2>Notes</h2>
@@ -119,12 +120,11 @@
               for certificate issuance</a>, but certificates are only requested when port <code>443</code> is used so simply avoid that port until ready.
             </li>
             <li>
-                No content caching is currently implemented. Static sites are extremely light on resource usage, and the Static Sites server itself is hugely lighter than fully fledged traditional web servers, so performance should not be an issue. If it is, static sites
-                are also prime candidates for fronting by services like <em>CloudFlare</em> or equivalent.
+                No content caching is currently implemented. Static sites are extremely light on resource usage, and the Static Sites server itself is hugely lighter than fully fledged traditional web servers (eg just a 9mb binary using 18mb RAM on Debian 4.19), so performance
+                should not be an issue. If it is, static sites are also prime candidates for fronting by services like <em>CloudFlare</em> or equivalent.
             </li>
             <li>
-                There is no HTTP to HTTPS redirect. I'm not in favour of supporting that; supporting a redirect reduces the chance of bookmarks/links being updated. If you need HTTP for some strange reason, run a second StaticSites instance on port 80 looking at the
-                same site(s).
+                There is no HTTP to HTTPS redirect. I'm not in favour of supporting that; supporting a redirect reduces the chance of bookmarks/links being updated. If you need HTTP for some reason, run a second StaticSites instance on port 80 looking at the same site(s).
             </li>
         </ul>
 
