@@ -24,7 +24,14 @@ Switch around the build folder and slashes according to whether you are running 
 
 ## You want to run your own sites
 
-Pre-built executables for Mac, Linux and Windows are available in the `cmd/builds` folder as well as from the public site. Run it as per the above.
+Pre-built executables for Mac, Linux and Windows are available in the `cmd/builds` folder as well as from the public site. Run it as per the above. Remember that the executables are small and standalone, so they can be committed into site repos or as part of a monorepo for convenience.
+
+Parameters/Arguments:
+
+- `-sites` folder containing all site folders
+- `-port` port to serve sites on (443 for https, default is 8000)
+- `-local` optional site to serve as localhost
+- `-verbose` whether to show requests as they occur
 
 ---
 
